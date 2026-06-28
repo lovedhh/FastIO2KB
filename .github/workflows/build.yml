@@ -1,0 +1,67 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build fast2kb (MAME, Win32)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=Win32 /p:PlatformToolset=v142
+
+    - name: Build fast2kb (MAME, x64)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=x64 /p:PlatformToolset=v142
+
+    - name: Build fast2kb (PPSSPP, Win32)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=Win32 /p:PlatformToolset=v142
+
+    - name: Build fast2kb (PPSSPP, x64)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=x64 /p:PlatformToolset=v142
+
+    - name: Build fast2kb (eX-BOARD, Win32)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=Win32 /p:PlatformToolset=v142
+
+    - name: Build fast2kb (eX-BOARD, x64)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=x64 /p:PlatformToolset=v142
+
+    - name: Build keymap_editor (Win32)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
+
+    - name: Build keymap_editor (x64)
+      run: |
+        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+
+    - name: Prepare artifacts
+      shell: pwsh
+      run: |
+        New-Item -ItemType Directory -Path artifacts -Force
+        Get-ChildItem -Path . -Recurse -Filter "*.exe" | ForEach-Object {
+          $dir = $_.Directory.Name
+          Copy-Item $_.FullName -Destination "artifacts/$($_.Name.Replace('.exe',''))_$dir.exe"
+        }
+        Copy-Item fast2kb\keymap_config.h artifacts\
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: FastIO2KB
+        path: artifacts/

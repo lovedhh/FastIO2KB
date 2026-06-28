@@ -1,0 +1,26 @@
+# OS metafiles
+.DS_Store
+
+# Build results
+eX-BOARD_Debug/
+eX-BOARD_Release/
+MAME_Debug/
+MAME_Release/
+PPSSPP_Debug/
+PPSSPP_Release/
+
+# Visual Studio user-specific files
+*.suo
+*.user
+
+# keymap_editor build output
+Debug/
+Release/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Visual C++ cache files
+ipch/
+*.opensdf
+*.sdf

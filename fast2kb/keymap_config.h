@@ -7,7 +7,7 @@
 struct KeyBinding {
     WORD scanCode;
     DWORD flags;
-    bool defined;
+    BOOL defined;
 };
 
 struct KeymapConfig {

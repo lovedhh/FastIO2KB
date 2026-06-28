@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - name: Checkout
@@ -20,35 +20,35 @@ jobs:
 
     - name: Build fast2kb (MAME, Win32)
       run: |
-        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=Win32 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=Win32 /p:PlatformToolset=v143
 
     - name: Build fast2kb (MAME, x64)
       run: |
-        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=x64 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=MAME_Release /p:Platform=x64 /p:PlatformToolset=v143
 
     - name: Build fast2kb (PPSSPP, Win32)
       run: |
-        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=Win32 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=Win32 /p:PlatformToolset=v143
 
     - name: Build fast2kb (PPSSPP, x64)
       run: |
-        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=x64 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=PPSSPP_Release /p:Platform=x64 /p:PlatformToolset=v143
 
     - name: Build fast2kb (eX-BOARD, Win32)
       run: |
-        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=Win32 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=Win32 /p:PlatformToolset=v143
 
     - name: Build fast2kb (eX-BOARD, x64)
       run: |
-        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=x64 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=eX-BOARD_Release /p:Platform=x64 /p:PlatformToolset=v143
 
     - name: Build keymap_editor (Win32)
       run: |
-        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143
 
     - name: Build keymap_editor (x64)
       run: |
-        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v142
+        msbuild fast2kb.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
 
     - name: Prepare artifacts
       shell: pwsh
